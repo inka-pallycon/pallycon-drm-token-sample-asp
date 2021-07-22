@@ -53,14 +53,14 @@ Class SecurityPolicyFairplay
             If s_jsonResult <> "{" Then
             s_jsonResult = s_jsonResult & ","
             End If
-            s_jsonResult = s_jsonResult & """allow_airplay"":" & m_allowAirplay
+            s_jsonResult = s_jsonResult & """allow_airplay"":" & Lcase(Cstr(m_allowAirplay))
         End If
 
         If Not IsEmpty(m_allowAvAdapter) Then
             If s_jsonResult <> "{" Then
             s_jsonResult = s_jsonResult & ","
             End If
-            s_jsonResult = s_jsonResult & """allow_av_adapter"":" & m_allowAvAdapter
+            s_jsonResult = s_jsonResult & """allow_av_adapter"":" & Lcase(Cstr(m_allowAvAdapter))
         End If
 
         s_jsonResult = s_jsonResult & "}"

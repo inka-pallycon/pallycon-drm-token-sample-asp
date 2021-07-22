@@ -107,7 +107,7 @@ Class pallyConDrmTokenClient
         s_jsonResult = s_jsonResult & """response_format"":""" & m_responseFormat & ""","
         End If
         If Not IsEmpty(m_keyRotation) Then
-            s_jsonResult = s_jsonResult & """key_rotation"":" & m_keyRotation & ","
+            s_jsonResult = s_jsonResult & """key_rotation"":" & Lcase(Cstr(m_keyRotation)) & ","
         End If
         s_jsonResult = s_jsonResult & """hash"":""" & m_hash & """}"
 

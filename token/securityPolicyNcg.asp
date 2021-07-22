@@ -47,14 +47,14 @@ Class SecurityPolicyFairplay
     Public Function ToJsonString()
         s_jsonResult = "{"
         If Not IsEmpty(m_allowMobileAbnormalDevice) Then
-            s_jsonResult = s_jsonResult & """allow_mobile_abnormal_device"":" & m_allowMobileAbnormalDevice
+            s_jsonResult = s_jsonResult & """allow_mobile_abnormal_device"":" & Lcase(Cstr(m_allowMobileAbnormalDevice))
         End If
 
         If Not IsEmpty(m_allowExternalDisplay) Then
             If s_jsonResult <> "{" Then
             s_jsonResult = s_jsonResult & ","
             End If
-            s_jsonResult = s_jsonResult & """allow_external_display"":" & m_allowExternalDisplay
+            s_jsonResult = s_jsonResult & """allow_external_display"":" & Lcase(Cstr(m_allowExternalDisplay))
         End If
 
         If Not IsEmpty(m_controlHdcp) Then
