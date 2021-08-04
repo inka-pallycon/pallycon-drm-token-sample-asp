@@ -1,12 +1,21 @@
 <%
 Class PolicyRequest
+    private m_policyVersion
     private m_playbackPolicy
     private m_securityPolicy
     private m_externalKey
 
     Private Sub Class_Initialize()
         set m_securityPolicy = Server.CreateObject("Scripting.Dictionary")
+        m_policyVersion = 2
     End Sub
+
+    Public Sub SetPolicyVersion(i_policyVersion)
+        m_policyVersion = i_policyVersion
+    End Sub
+    Public Function GetPolicyVersion()
+        GetPolicyVersion = m_policyVersion
+    End Function
 
     Public Sub SetPlaybackPolicy(o_playbackPolicy)
         Set m_playbackPolicy = o_playbackPolicy
@@ -34,17 +43,14 @@ Class PolicyRequest
     End Function
 
     Public Function ToJsonString()
-        s_jsonResult = "{"
+        s_jsonResult = "{""policy_version"":"
+            s_jsonResult = s_jsonResult & m_policyVersion
         If Not IsEmpty(m_playbackPolicy) Then
-            s_jsonResult = s_jsonResult & """playback_policy"":" & m_playbackPolicy.ToJsonString
+            s_jsonResult = s_jsonResult & ",""playback_policy"":" & m_playbackPolicy.ToJsonString
         End If
         If Not IsEmpty(m_securityPolicy) Then
-            If s_jsonResult <> "{" Then
-                s_jsonResult = s_jsonResult & ","
-            End If
-
             i_securitySize = m_securityPolicy.Count
-            s_jsonResult = s_jsonResult & """security_policy"":["
+            s_jsonResult = s_jsonResult & ",""security_policy"":["
 
 
             For i=0 To i_securitySize-1

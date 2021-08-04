@@ -29,7 +29,7 @@ Class pallyConDrmTokenClient
 		encrypter.InitialVector = IV
 
         Dim current, currentDate, currentTime
-        current=Now()
+        current=DateAdd("H", (TIME_ZONE*-1), Now())
         currentDate=FormatDateTime(current, 2)
         currentTime=FormatDateTime(current, 4)
         currentSecond=Right(current, 3)
