@@ -1,7 +1,14 @@
 # PallyCon ASP Token Sample
 
-## Required
-Set the library corresponding to the server cpu register size used in the pallyConDrmTokenClient class constructor.
+## Configuration
+
+1. Edit Config.asp file to set the Site ID and Site Key values of your PallyCon account. (can be found in PallyCon Console site)
+
+2. Register AES encryptor DLL(RyeolStringEncrypter.dll) by your Windows version(32 or 64bit).
+  - Copy the appropriate dll file from 'aes_module' folder to your Windows' System32 folder.
+  - Run 'Regsvr32 RyeolStringEncrypter.dll' in command prompt with administrator rights.
+
+3. Set the library corresponding to the server cpu register size used in the pallyConDrmTokenClient class constructor.
 ```asp
 //TODO Required : Set the library corresponding to the cpu register size.
 '64bit
