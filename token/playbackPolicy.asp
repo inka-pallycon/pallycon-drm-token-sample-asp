@@ -15,7 +15,7 @@ Class PlaybackPolicy
 
     Public Function GetPersistent()
         If IsEmpty(m_persistent) then
-            GetPersistent = False
+            GetPersistent = false
         Else
             GetPersistent = m_persistent
         End If
@@ -70,16 +70,15 @@ Class PlaybackPolicy
         exReg.Pattern = "^[0-9]{4}-[0,1][0-9]-[0-5][0-9]T[0-2][0-3]:[0-5][0-9]:[0-5][0-9]Z$"
         exReg.Global = True
         exReg.IgnoreCase = True
-        Set match = exReg.Execute(sTarget)
-
-        CheckHex32 = match.count
+        Set match = exReg.Execute(s_target)
+        CheckTimeFormat = match.count
     End Function
 
     Public Function ToJsonString()
         s_jsonResult = "{"
 
         If Not IsEmpty(m_persistent) Then
-            s_jsonResult = s_jsonResult & """persistent"":" & m_persistent
+            s_jsonResult = s_jsonResult & """persistent"":" & Lcase(Cstr(m_persistent))
         Else
             s_jsonResult = s_jsonResult & """persistent"": false"
         End If

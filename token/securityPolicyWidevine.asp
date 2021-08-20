@@ -98,7 +98,7 @@ Class SecurityPolicyWidevine
                 s_jsonResult = s_jsonResult & ","
             End If
 
-            s_jsonResult = s_jsonResult & """disable_analog_output"":" & m_disableAnalogOutput
+            s_jsonResult = s_jsonResult & """disable_analog_output"":" & Lcase(Cstr(m_disableAnalogOutput))
         End If
 
         If Not IsEmpty(m_hdcpSrmRule) Then
@@ -114,7 +114,7 @@ Class SecurityPolicyWidevine
                 s_jsonResult = s_jsonResult & ","
             End If
 
-            s_jsonResult = s_jsonResult & """override_device_revocation"":" & m_overrideDeviceRevocation
+            s_jsonResult = s_jsonResult & """override_device_revocation"":" & Lcase(Cstr(m_overrideDeviceRevocation))
         End If
 
         s_jsonResult = s_jsonResult & "}"

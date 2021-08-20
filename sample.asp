@@ -24,7 +24,7 @@ Set obj_tokenBuilder = new TokenBuilder
 
 //Create Playback Policy Sample
 Set obj_playbackPolicy = new PlaybackPolicy
-obj_playbackPolicy.setPersistent True
+obj_playbackPolicy.setPersistent true
 obj_playbackPolicy.setLicenseDuration 150
 obj_playbackPolicy.setAllowedTrackTypes "SD_HD"
 
@@ -41,23 +41,23 @@ obj_securityPolicy.setWidevine obj_securityPolicyWidevine
 
 d_securityPolicy.add Cstr(d_securityPolicy.Count), obj_securityPolicy
 
-Set obj_externalKey = new ExternalKey
+' Set obj_externalKey = new ExternalKey
 
-Set obj_externalKeyMpegCenc = new ExternalKeyMpegCenc
-obj_externalKeyMpegCenc.SetKeyId "12345616123456FF3456123456123456"
-obj_externalKeyMpegCenc.SetKey "12345616123456dd3456123456123456"
+' Set obj_externalKeyMpegCenc = new ExternalKeyMpegCenc
+' obj_externalKeyMpegCenc.SetKeyId "12345616123456FF3456123456123456"
+' obj_externalKeyMpegCenc.SetKey "12345616123456dd3456123456123456"
 
-Set obj_externalKeyMpegCenc2 = new ExternalKeyMpegCenc
-obj_externalKeyMpegCenc2.SetKeyId "aa345616123456FF3456123456123456"
-obj_externalKeyMpegCenc2.SetKey "bb345616123456dd3456123456123456"
+' Set obj_externalKeyMpegCenc2 = new ExternalKeyMpegCenc
+' obj_externalKeyMpegCenc2.SetKeyId "aa345616123456FF3456123456123456"
+' obj_externalKeyMpegCenc2.SetKey "bb345616123456dd3456123456123456"
 
-obj_externalKey.AddMpegCenc obj_externalKeyMpegCenc
-obj_externalKey.AddMpegCenc obj_externalKeyMpegCenc2
+' obj_externalKey.AddMpegCenc obj_externalKeyMpegCenc
+' obj_externalKey.AddMpegCenc obj_externalKeyMpegCenc2
 
 
 obj_tokenBuilder.PlaybackPolicy(obj_playbackPolicy)
 obj_tokenBuilder.SecurityPolicy(d_securityPolicy)
-obj_tokenBuilder.ExternalKey(obj_externalKey)
+' obj_tokenBuilder.ExternalKey(obj_externalKey)
 
 ' /* create token rule build */
 Set obj_policyRequest = obj_tokenBuilder.Build
