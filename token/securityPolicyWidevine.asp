@@ -61,14 +61,20 @@ Class SecurityPolicyWidevine
         GetHdcpSrmRule = m_hdcpSrmRule
     End Function
 
-    Public Sub SetOverrideDeviceRevocation(s_overrideDeviceRevocation)
-        If Not IsEmpty(s_overrideDeviceRevocation) Then
-            m_overrideDeviceRevocation = s_overrideDeviceRevocation
+    Public Sub SetOverrideDeviceRevocation(b_overrideDeviceRevocation)
+        If VarType(b_overrideDeviceRevocation) = 11 then
+            m_overrideDeviceRevocation = b_overrideDeviceRevocation
+        Else
+            call Err.Raise(1023, "SecurityPolicyWidevine", "The override_device_revocation should be boolean")
         End If
     End Sub
 
     Public Function GetOverrideDeviceRevocation()
-        m_overrideDeviceRevocation = s_overrideDeviceRevocation
+        If IsEmpty(m_overrideDeviceRevocation) then
+            GetOverrideDeviceRevocation = false
+        Else
+            GetOverrideDeviceRevocation = m_overrideDeviceRevocation
+        End If
     End Function
 
     Public Function ToJsonString()
@@ -120,7 +126,7 @@ Class SecurityPolicyWidevine
         s_jsonResult = s_jsonResult & "}"
         ToJsonString = s_jsonResult
     End Function
-    
+
 End Class
 
 %>
