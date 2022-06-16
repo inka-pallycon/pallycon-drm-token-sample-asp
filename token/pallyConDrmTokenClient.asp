@@ -14,10 +14,10 @@ Class pallyConDrmTokenClient
     private m_accessKey
     private m_siteKey
     private m_policy
-    private m_encPolicy    
+    private m_encPolicy
     private m_responseFormat
     private m_hash
-    
+
     private Sub Class_Initialize()
 
         //TODO Required : Set the library corresponding to the cpu register size.
@@ -50,10 +50,14 @@ Class pallyConDrmTokenClient
         m_drmType = "FairPlay"
     end Sub
 
+    Public Sub Ncg()
+        m_drmType = "NCG"
+    end Sub
+
     Public Sub SiteId(s_siteId)
         m_siteId = s_siteId
     end Sub
-    
+
     Public Sub UserId(s_userId)
         m_userId = s_userId
     end Sub
@@ -65,7 +69,7 @@ Class pallyConDrmTokenClient
     Public Sub KeyRotation(s_keyRotation)
             m_keyRotation = s_keyRotation
         end Sub
-    
+
     Public Sub AccessKey(s_accessKey)
         m_accessKey = s_accessKey
     end Sub
@@ -92,7 +96,7 @@ Class pallyConDrmTokenClient
         Call CheckValidation
         m_encPolicy = CreatePolicy
         m_hash = CreateHash
-    
+
         Execute = Base64encode(ToJsonString)
     End Function
 
@@ -146,7 +150,7 @@ Class pallyConDrmTokenClient
         body = m_accessKey & m_drmType & m_siteId & m_userId & m_cid & m_encPolicy & m_timestamp
 
         hexData = Sha.SHA256(body)
-      
+
         CreateHash = BinaryToText(TextToBinary(hexData, "bin.hex"), "bin.base64")
     End Function
 
@@ -181,7 +185,7 @@ Class pallyConDrmTokenClient
     Public Function GetPolicy()
         Set GetPolicy = m_policy
     end Function
-    
+
     Function TextToBinary(text, dataType)
         Dim dom
         Set dom = CreateObject("Microsoft.XMLDOM")
