@@ -11,6 +11,7 @@ Response.ContentType="text/html;charset=utf-8"
 #Include File= "token/securityPolicyWidevine.asp" --><!--
 #Include File= "token/externalKey.asp" --><!--
 #Include File= "token/externalKeympegCenc.asp" --><!--
+#Include File= "token/externalKeyHlsAes.asp" --><!--
 #Include File= "token/tokenBuilder.asp" --><!--
 #Include File= "config.asp" --><%
 Dim obj_drmTokenClient, obj_policyRequest
@@ -27,6 +28,7 @@ Set obj_playbackPolicy = new PlaybackPolicy
 obj_playbackPolicy.setPersistent true
 obj_playbackPolicy.setLicenseDuration 150
 obj_playbackPolicy.setAllowedTrackTypes "SD_HD"
+' obj_playbackPolicy.SetMaxStreamPerUser 5
 
 //Create Security Policy Sample
 set d_securityPolicy = Server.CreateObject("Scripting.Dictionary")
@@ -35,6 +37,7 @@ Set obj_securityPolicy = new SecurityPolicy
 
 Set obj_securityPolicyWidevine = new SecurityPolicyWidevine
 obj_securityPolicyWidevine.SetRequireHdcpVersion "HDCP_V1"
+' obj_securityPolicyWidevine.SetEnableLicenseCipher true
 
 obj_securityPolicy.setTrackType "HD"
 obj_securityPolicy.setWidevine obj_securityPolicyWidevine
@@ -51,8 +54,13 @@ d_securityPolicy.add Cstr(d_securityPolicy.Count), obj_securityPolicy
 ' obj_externalKeyMpegCenc2.SetKeyId "aa345616123456FF3456123456123456"
 ' obj_externalKeyMpegCenc2.SetKey "bb345616123456dd3456123456123456"
 
+' Set obj_externalKeyHlsAes = new ExternalKeyHlsAes
+' obj_externalKeyHlsAes.SetKeyId "12345616123456FF3456123456123456"
+' obj_externalKeyHlsAes.SetKey "12345616123456dd3456123456123456"
+
 ' obj_externalKey.AddMpegCenc obj_externalKeyMpegCenc
 ' obj_externalKey.AddMpegCenc obj_externalKeyMpegCenc2
+' obj_externalKey.AddHlsAes obj_externalKeyHlsAes
 
 
 obj_tokenBuilder.PlaybackPolicy(obj_playbackPolicy)

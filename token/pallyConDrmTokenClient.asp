@@ -23,7 +23,7 @@ Class pallyConDrmTokenClient
         //TODO Required : Set the library corresponding to the cpu register size.
         '64bit
 		Set encrypter = Server.CreateObject ("Ryeol.StringEncrypter")
-		'32bit
+        '32bit
 		'Set encrypter = Server.CreateObject ("Hyeongryeol.StringEncrypter")
 
 		encrypter.InitialVector = IV

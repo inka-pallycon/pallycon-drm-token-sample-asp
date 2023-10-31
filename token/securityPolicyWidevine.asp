@@ -6,6 +6,7 @@ Class SecurityPolicyWidevine
     private m_disableAnalogOutput
     private m_hdcpSrmRule
     private m_overrideDeviceRevocation
+    private m_enableLicenseCipher
 
     Public Sub SetSecurityLevel(i_securityLevel)
         If Not IsEmpty(i_securityLevel) Then
@@ -77,6 +78,22 @@ Class SecurityPolicyWidevine
         End If
     End Function
 
+    Public Sub SetEnableLicenseCipher(b_enableLicenseCipher)
+        If VarType(b_enableLicenseCipher) = 11 then
+            m_enableLicenseCipher = b_enableLicenseCipher
+        Else
+            call Err.Raise(1024, "SecurityPolicyWidevine", "The enable_license_cipher should be boolean")
+        End If
+    End Sub
+
+    Public Function GetEnableLicenseCipher()
+        If IsEmpty(m_enableLicenseCipher) then
+            GetEnableLicenseCipher = false
+        Else
+            GetEnableLicenseCipher = m_enableLicenseCipher
+        End If
+    End Function
+
     Public Function ToJsonString()
         s_jsonResult = "{"
         If Not IsEmpty(m_securityLevel) Then
@@ -121,6 +138,14 @@ Class SecurityPolicyWidevine
             End If
 
             s_jsonResult = s_jsonResult & """override_device_revocation"":" & Lcase(Cstr(m_overrideDeviceRevocation))
+        End If
+
+        If Not IsEmpty(m_enableLicenseCipher) Then
+            If s_jsonResult <> "{" Then
+                s_jsonResult = s_jsonResult & ","
+            End If
+
+            s_jsonResult = s_jsonResult & """enable_license_cipher"":" & Lcase(Cstr(m_enableLicenseCipher))
         End If
 
         s_jsonResult = s_jsonResult & "}"

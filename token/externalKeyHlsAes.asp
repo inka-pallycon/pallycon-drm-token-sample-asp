@@ -3,6 +3,7 @@ Class ExternalKeyHlsAes
     private m_trackType
     private m_key
     private m_iv
+    private m_keyId
 
     Public Sub SetKey(s_key)
         If CheckHex32(s_key) = 1 Then
@@ -35,6 +36,18 @@ Class ExternalKeyHlsAes
         GetTrackType = m_trackType
     End Function
 
+    Public Sub SetKeyId(s_keyId)
+        If CheckHex32(s_keyId) = 1 Then
+            m_keyId = s_keyId
+        Else
+            call Err.Raise(1046, "ExternalKeyHlsAes", "The KeyId should be 16byte hex String")
+        End If
+    End Sub
+
+    Public Function GetKeyId()
+        GetIv = m_keyId
+    End Function
+
     Public Function ToJsonString()
         s_jsonResult = "{"
         If Not IsEmpty(m_trackType) Then
@@ -43,6 +56,7 @@ Class ExternalKeyHlsAes
             s_jsonResult = s_jsonResult & """track_type"":""ALL"","
         End If
         s_jsonResult = s_jsonResult & """key"":""" & m_key & ""","
+        s_jsonResult = s_jsonResult & """key_id"":""" & m_keyId & ""","
         s_jsonResult = s_jsonResult & """iv"":""" & m_iv & """}"
         ToJsonString = s_jsonResult
     End Function

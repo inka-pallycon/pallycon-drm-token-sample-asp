@@ -4,6 +4,7 @@ Class PlaybackPolicy
     private m_licenseDuration
     private m_expireDate
     private m_allowedTrackTypes
+    private m_maxStreamPerUser
 
     Public Sub SetPersistent(b_persistent)
         If VarType(b_persistent) = 11 then
@@ -64,6 +65,18 @@ Class PlaybackPolicy
         GetAllowedTrackTypes = m_allowedTrackTypes
     End Function
 
+    Public Sub SetMaxStreamPerUser(b_maxStreamPerUser)
+        If VarType(b_maxStreamPerUser) = 2 OR VarType(b_maxStreamPerUser) = 3 then
+            m_maxStreamPerUser = b_maxStreamPerUser
+        Else
+            call Err.Raise(1012, "PlaybackPolicy", "The maxStreamPerUser should be number")
+        End If
+    End Sub
+
+    Public Function GetMaxStreamPerUser()
+        GetMaxStreamPerUser = m_maxStreamPerUser
+    End Function
+
     Private Function CheckTimeFormat(s_target)
         Set exReg = New RegExp
 
@@ -94,6 +107,11 @@ Class PlaybackPolicy
         If Not IsEmpty(m_allowedTrackTypes) Then
             s_jsonResult = s_jsonResult & ",""allowed_track_types"": """ & m_allowedTrackTypes & """"
         End If
+
+        If Not IsEmpty(m_maxStreamPerUser) Then
+            s_jsonResult = s_jsonResult & ",""max_stream_per_user"": """ & m_maxStreamPerUser & """"
+        End If
+
         s_jsonResult = s_jsonResult & "}"
         ToJsonString = s_jsonResult
     End Function
